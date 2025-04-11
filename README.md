@@ -1,1 +1,9 @@
-# pm-laboratorio
+# Principios de Mecatrónica: Proyecto de Laboratorio
+
+A lo largo del laboratorio de Principios de Mecatrónica, profundizamos en la arquitectura de los microcontroladores AVR y en programación en lenguaje ensamblador, con énfasis en el diseño de sistemas embebidos para aplicaciones de la vida real. El proyecto descrito en este reporte hace uso del Arduino Mega, que integra un microcontrolador ATmega2560, así como de periféricos fundamentales (sensor ultrasónico, puente H y motores, entre otros) para construir un robot móvil autónomo capaz de desplazarse en un entorno en condiciones controladas.
+
+En particular, implementamos la detección y el frenado frente a obstáculos ubicados aproximadamente a 30 ± 2 cm, aplicando conceptos de configuración de puertos de entrada/salida y uso de timers estudiados a lo largo del curso. Esta experiencia integra tanto la base teórica del manejo de instrucciones en lenguaje ensamblador como los principios de control y sensado necesarios para resolver problemas de automatización y control en ambientes reales.
+
+El programa que controla al robot integra el uso de un sensor ultrasónico y el control de motores mediante señales PWM. El sensor, conectado a pines del puerto H, emite un pulso de disparo (TRIG) y mide el pulso de eco (ECHO) usando el Timer4, con el fin de determinar la distancia a un obstáculo. Si el robot detecta que está demasiado lejos (por encima de 32 cm) o demasiado cerca (por debajo de 28 cm) del objetivo (30 cm), ajusta su comportamiento: avanza, retrocede o se detiene. 
+
+Para el control del motor, se usan las salidas de dirección en PORTB (bits bajos) y señales PWM generadas por el Timer1 en modo Fast PWM, de modo que el robot se desplace según la distancia medida. Además, la distancia calculada se envía continuamente al computador mediante la interfaz UART (a 9600 baudios). Se mantiene un bucle principal (main_loop) para la captura y el procesamiento de la señal ultrasónica, además de la consiguiente toma de decisiones respecto al movimiento del robot.
